@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project>
+<import file="build.xml"/>
+    
+ <target name="compile">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="CalculatorExampleMain.classpath"/>
+        </javac>
+  </target>
+
+  
+  <target depends="clean,init,compile,CalculatorExampleTest" name = "jar">
+      <delete file = "Calculator.jar"/>
+      <delete file = "MANIFEST.MF"/>
+      <manifest file = "MANIFEST.MF">
+          <attribute name = "Main-Class" value = "CalculatorExampleMain"/>
+          <attribute name = "Class-Path" value = "."/>
+      </manifest>
+      <jar destfile = "Calculator.jar" basedir = "./bin/" includes = "*.class"  manifest = "MANIFEST.MF"/>
+ </target>
+</project>
